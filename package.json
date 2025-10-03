@@ -1,0 +1,33 @@
+{
+  "name": "caching-proxy",
+  "version": "1.0.0",
+  "description": "My awesome CLI tool",
+  "main": "dist/index.js",
+  "bin": {
+    "caching-proxy": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "ts-node src/index.ts",
+    "dev": "ts-node src/index.ts"
+  },
+  "keywords": [
+    "cli",
+    "typescript",
+    "nodejs"
+  ],
+  "author": "Ronit Raj",
+  "license": "MIT",
+  "dependencies": {
+    "@types/express": "^5.0.3",
+    "axios": "^1.12.2",
+    "chalk": "^5.6.2",
+    "commander": "^11.0.0",
+    "express": "^5.1.0",
+    "ts-node": "^10.9.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.5.0",
+    "typescript": "^5.3.0"
+  }
+}
