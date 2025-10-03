@@ -10,13 +10,27 @@ const app = express();
 
 const program = new Command();
 
-program.name("caching-proxy").description("caching proxy!!").version("1.0.0");
-
 program
-  .description("start proxy server")
-  .option("-p, --port <port>", "port number")
-  .option("-o, --origin <origin_url>", "origin URL")
-  .action((options) => {
+  .name("caching-proxy")
+  .description("CLI caching proxy server")
+  .version("1.0.0")
+  .option("--clear-cache", "Clear all cached responses")
+  .option("-p, --port <port>", "Port number")
+  .option("-o, --origin <origin_url>", "Origin URL")
+  .action(async (options) => {
+    if (options.clearCache) {
+      try {
+        await redis.flushall();
+        console.log(chalk.green("✅ Cache cleared successfully"));
+        await redis.quit();
+
+        process.exit(0);
+      } catch (err) {
+        console.error(chalk.red("❌ Failed to clear cache:"), err);
+        await redis.quit();
+        process.exit(1);
+      }
+    }
     console.log(options);
     const port = options.port;
     const origin = options.origin;
